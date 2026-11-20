@@ -1,0 +1,1246 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- GANTI: judul & meta sesuai nama klien -->
+<title>Raka Pratama — Professional MC</title>
+<meta name="description" content="Portfolio Raka Pratama, Master of Ceremony profesional untuk wedding, corporate event, gathering, seminar, dan talkshow.">
+
+<!-- Google Fonts: Syne untuk heading, Inter untuk teks isi -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   KONFIGURASI WARNA & VARIABEL
+   GANTI: --orange jika klien minta warna aksen lain
+   ============================================================ */
+:root{
+  --orange:#FF3D00;
+  --black:#111111;
+  --white:#FFFFFF;
+  --gray:#F4F4F4;
+  --gray-mid:#9A9A9A;
+  --radius:28px;
+  --radius-lg:32px;
+  --font-head:'Syne', sans-serif;
+  --font-body:'Inter', sans-serif;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:110px}
+body{
+  font-family:var(--font-body);
+  background:var(--white);
+  color:var(--black);
+  line-height:1.6;
+  overflow-x:hidden; /* cegah horizontal scroll */
+}
+img{max-width:100%;display:block}
+a{text-decoration:none;color:inherit}
+ul{list-style:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none}
+
+.container{width:min(1200px,92%);margin-inline:auto}
+
+h1,h2,h3,h4{font-family:var(--font-head);line-height:1.08;letter-spacing:-.02em}
+
+/* Tombol pill */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:15px 30px;border-radius:999px;font-weight:600;font-size:.95rem;
+  transition:transform .25s ease, background .25s ease, color .25s ease, box-shadow .25s ease;
+  white-space:nowrap;
+}
+.btn:hover{transform:translateY(-3px)}
+.btn-outline{
+  border:2px solid var(--orange);color:var(--orange);background:transparent;
+}
+.btn-outline:hover{background:var(--orange);color:var(--white);box-shadow:0 10px 24px rgba(255,61,0,.28)}
+.btn-white{
+  background:var(--white);color:var(--black);border:2px solid var(--black);
+}
+.btn-white:hover{background:var(--black);color:var(--white)}
+.btn-orange{
+  background:var(--orange);color:var(--white);border:2px solid var(--orange);
+}
+.btn-orange:hover{box-shadow:0 12px 26px rgba(255,61,0,.32)}
+
+/* Label kecil di atas judul section */
+.eyebrow{
+  display:inline-block;padding:8px 18px;border-radius:999px;
+  background:rgba(255,61,0,.12);color:var(--orange);
+  font-size:.8rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  margin-bottom:18px;
+}
+.section-dark .eyebrow{background:rgba(255,61,0,.18)}
+
+/* ============================================================
+   ANIMASI FADE-IN SAAT SCROLL
+   ============================================================ */
+.reveal{opacity:0;transform:translateY(34px);transition:opacity .7s ease, transform .7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal.d1{transition-delay:.1s}
+.reveal.d2{transition-delay:.2s}
+.reveal.d3{transition-delay:.3s}
+.reveal.d4{transition-delay:.4s}
+
+@media (prefers-reduced-motion: reduce){
+  .reveal{opacity:1;transform:none;transition:none}
+  .marquee-track{animation:none !important}
+  html{scroll-behavior:auto}
+}
+
+/* ============================================================
+   1. NAVBAR — pill hitam melayang, logo di tengah
+   ============================================================ */
+.nav-wrap{
+  position:fixed;top:18px;left:0;right:0;z-index:1000;
+  display:flex;justify-content:center;pointer-events:none;
+}
+.nav{
+  pointer-events:auto;
+  display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
+  gap:22px;background:var(--black);color:var(--white);
+  padding:10px 14px;border-radius:999px;
+  box-shadow:0 14px 34px rgba(0,0,0,.22);
+  width:min(860px,94%);
+}
+.nav ul{display:flex;align-items:center;gap:6px}
+.nav ul:first-child{justify-content:flex-start}
+.nav ul:last-child{justify-content:flex-end}
+.nav a.nav-link{
+  display:block;padding:9px 15px;border-radius:999px;
+  font-size:.88rem;font-weight:500;color:#D9D9D9;
+  transition:color .2s ease, background .2s ease;
+}
+.nav a.nav-link:hover{color:var(--white)}
+.nav a.nav-link.active{color:var(--orange);font-weight:700}
+/* Logo / inisial di tengah navbar — GANTI: teks inisial di bawah */
+.logo{
+  font-family:var(--font-head);font-weight:800;font-size:1.05rem;
+  background:var(--orange);color:var(--white);
+  width:44px;height:44px;border-radius:50%;
+  display:grid;place-items:center;letter-spacing:.02em;
+  transition:transform .25s ease;
+}
+.logo:hover{transform:rotate(-8deg) scale(1.05)}
+
+/* Hamburger (mobile) */
+.hamburger{
+  display:none;grid-column:3;justify-self:end;
+  width:44px;height:44px;border-radius:50%;
+  background:#242424;place-items:center;
+}
+.hamburger span{
+  display:block;width:18px;height:2px;background:var(--white);
+  position:relative;transition:.3s;
+}
+.hamburger span::before,.hamburger span::after{
+  content:"";position:absolute;left:0;width:18px;height:2px;background:var(--white);transition:.3s;
+}
+.hamburger span::before{top:-6px}
+.hamburger span::after{top:6px}
+.hamburger.open span{background:transparent}
+.hamburger.open span::before{top:0;transform:rotate(45deg)}
+.hamburger.open span::after{top:0;transform:rotate(-45deg)}
+
+/* Menu mobile */
+.mobile-menu{
+  pointer-events:auto;
+  position:absolute;top:74px;left:50%;transform:translateX(-50%) translateY(-12px);
+  width:min(860px,94%);background:var(--black);border-radius:24px;
+  padding:14px;display:none;flex-direction:column;gap:4px;
+  box-shadow:0 18px 40px rgba(0,0,0,.3);
+  opacity:0;transition:.28s ease;
+}
+.mobile-menu.show{display:flex;opacity:1;transform:translateX(-50%) translateY(0)}
+.mobile-menu a{
+  padding:13px 18px;border-radius:16px;color:#D9D9D9;font-weight:500;font-size:.95rem;
+}
+.mobile-menu a.active,.mobile-menu a:hover{color:var(--orange);background:#1E1E1E}
+
+/* ============================================================
+   2. HERO
+   ============================================================ */
+.hero{
+  padding:150px 0 70px;
+  background:
+    radial-gradient(ellipse 60% 45% at 50% 78%, rgba(255,61,0,.10), transparent 70%),
+    var(--white);
+}
+.hero-inner{text-align:center;position:relative}
+.bubble{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--black);color:var(--white);
+  padding:9px 20px;border-radius:999px;font-size:.85rem;font-weight:600;
+  margin-bottom:24px;
+}
+.bubble::before{
+  content:"";width:8px;height:8px;border-radius:50%;background:var(--orange);
+  animation:pulse 1.6s infinite;
+}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
+
+.hero h1{
+  font-size:clamp(2.5rem,8.5vw,6.2rem);
+  font-weight:800;text-transform:uppercase;
+}
+.hero h1 .accent{color:var(--orange)}
+.hero-sub{
+  max-width:560px;margin:22px auto 0;color:#555;font-size:clamp(.98rem,1.6vw,1.12rem);
+}
+
+.hero-actions{
+  display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:32px;
+}
+
+/* Lingkaran oranye + foto placeholder */
+.hero-visual{
+  position:relative;width:min(560px,92%);margin:52px auto 0;
+  aspect-ratio:1/.82;
+}
+.hero-circle{
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:min(340px,64vw);aspect-ratio:1;border-radius:50%;
+  background:var(--orange);
+  display:grid;place-items:center;overflow:hidden;
+  box-shadow:0 30px 60px rgba(255,61,0,.28);
+}
+/* GANTI: ganti isi .hero-circle dengan <img src="foto-raka.png" alt="Raka Pratama"> */
+.hero-circle svg{width:62%;height:62%}
+.hero-circle .photo-placeholder{display:none}
+
+/* Kartu melayang kiri & kanan */
+.float-card{
+  position:absolute;top:50%;transform:translateY(-50%);
+  background:var(--white);border:1px solid #ECECEC;border-radius:24px;
+  padding:20px 22px;text-align:left;width:230px;
+  box-shadow:0 18px 40px rgba(0,0,0,.10);
+  z-index:2;
+}
+.float-left{left:-6%;animation:floaty 5s ease-in-out infinite}
+.float-right{right:-6%;animation:floaty 5s ease-in-out infinite .8s}
+@keyframes floaty{0%,100%{margin-top:0}50%{margin-top:-12px}}
+.float-card .quote-mark{
+  font-family:var(--font-head);font-size:2.2rem;color:var(--orange);line-height:.6;
+}
+.float-card p{font-size:.86rem;color:#444;margin:10px 0 14px;line-height:1.5}
+.float-card .big-num{
+  font-family:var(--font-head);font-size:1.7rem;font-weight:800;color:var(--black);
+}
+.float-card .num-label{font-size:.78rem;color:#777;font-weight:500}
+.float-card .card-head{
+  display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px;
+}
+.float-card .icon-dot{
+  width:38px;height:38px;border-radius:50%;background:var(--gray);
+  display:grid;place-items:center;flex-shrink:0;
+}
+.stars{display:flex;gap:3px}
+.stars svg{width:15px;height:15px;fill:#FFB800}
+.exp-years{font-family:var(--font-head);font-size:1.5rem;font-weight:800}
+.exp-label{font-size:.8rem;color:#666;font-weight:500}
+
+/* ============================================================
+   3. LAYANAN — section hitam membulat
+   ============================================================ */
+.section{padding:70px 0}
+.section-dark{
+  background:var(--black);color:var(--white);
+  border-radius:var(--radius-lg);
+  padding:64px 6%;
+}
+.section-head{text-align:center;max-width:640px;margin:0 auto 46px}
+.section-head h2{
+  font-size:clamp(1.9rem,4.6vw,3.2rem);font-weight:800;text-transform:uppercase;
+}
+.section-head h2 .accent{color:var(--orange)}
+.section-head p{margin-top:14px;color:#666;font-size:.98rem}
+.section-dark .section-head p{color:#A5A5A5}
+
+.service-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:22px;
+}
+.service-card{
+  background:#1C1C1C;border:1px solid #2A2A2A;border-radius:var(--radius);
+  padding:32px 28px 78px;position:relative;color:var(--white);
+  transition:transform .3s ease, box-shadow .3s ease, background .3s ease;
+}
+.service-card:hover{transform:translateY(-8px);box-shadow:0 22px 44px rgba(0,0,0,.35)}
+.service-card.highlight{
+  background:var(--orange);border-color:var(--orange);
+  box-shadow:0 20px 46px rgba(255,61,0,.32);
+}
+.service-card .svc-num{
+  font-family:var(--font-head);font-size:.8rem;font-weight:700;
+  color:var(--gray-mid);letter-spacing:.15em;margin-bottom:26px;display:block;
+}
+.service-card.highlight .svc-num{color:rgba(255,255,255,.75)}
+.service-card h3{font-size:1.35rem;font-weight:700;margin-bottom:12px}
+.service-card p{font-size:.9rem;color:#A8A8A8;line-height:1.65}
+.service-card.highlight p{color:rgba(255,255,255,.9)}
+.svc-arrow{
+  position:absolute;right:24px;bottom:24px;
+  width:46px;height:46px;border-radius:50%;
+  background:#2A2A2A;display:grid;place-items:center;
+  transition:.3s ease;
+}
+.service-card.highlight .svc-arrow{background:var(--white)}
+.service-card:hover .svc-arrow{background:var(--white);transform:rotate(45deg)}
+.service-card.highlight:hover .svc-arrow{background:var(--black)}
+.svc-arrow svg{width:18px;height:18px;stroke:var(--white);transition:.3s}
+.service-card.highlight .svc-arrow svg{stroke:var(--orange)}
+.service-card:hover .svc-arrow svg{stroke:var(--orange)}
+.service-card.highlight:hover .svc-arrow svg{stroke:var(--white)}
+
+/* ============================================================
+   4. PORTFOLIO — slider kartu dokumentasi event
+   ============================================================ */
+.portfolio{background:var(--gray);border-radius:var(--radius-lg);padding:64px 6%}
+.pf-controls{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:18px;flex-wrap:wrap;margin-bottom:32px;
+}
+.pf-filters{display:flex;gap:10px;flex-wrap:wrap}
+.chip{
+  padding:10px 20px;border-radius:999px;background:var(--white);
+  font-size:.85rem;font-weight:600;color:#555;border:1px solid #E4E4E4;
+  transition:.25s ease;
+}
+.chip:hover{border-color:var(--orange);color:var(--orange)}
+.chip.active{background:var(--black);color:var(--white);border-color:var(--black)}
+.arrows{display:flex;gap:10px}
+.arrow-btn{
+  width:50px;height:50px;border-radius:50%;background:var(--black);color:var(--white);
+  display:grid;place-items:center;transition:.25s ease;
+}
+.arrow-btn:hover{background:var(--orange);transform:scale(1.06)}
+.arrow-btn:disabled{opacity:.28;pointer-events:none}
+.arrow-btn svg{width:18px;height:18px;stroke:currentColor}
+
+.pf-track{
+  display:flex;gap:22px;overflow-x:auto;scroll-snap-type:x mandatory;
+  padding-bottom:10px;scrollbar-width:none;
+}
+.pf-track::-webkit-scrollbar{display:none}
+.pf-card{
+  flex:0 0 calc((100% - 44px)/3);min-width:260px;scroll-snap-align:start;
+  background:var(--white);border-radius:var(--radius);overflow:hidden;
+  transition:transform .3s ease, box-shadow .3s ease;
+}
+.pf-card:hover{transform:translateY(-8px);box-shadow:0 22px 44px rgba(0,0,0,.12)}
+/* GANTI: ganti .pf-thumb dengan <img src="event-1.jpg" alt="..."> */
+.pf-thumb{
+  aspect-ratio:4/3;background:#DDDDDD;display:grid;place-items:center;gap:8px;
+  color:#8A8A8A;font-size:.8rem;font-weight:600;position:relative;
+}
+.pf-thumb svg{width:44px;height:44px;stroke:#9C9C9C}
+.pf-tag{
+  position:absolute;top:14px;left:14px;background:var(--black);color:var(--white);
+  padding:6px 14px;border-radius:999px;font-size:.72rem;font-weight:700;
+  letter-spacing:.06em;text-transform:uppercase;
+}
+.pf-tag.wedding{background:var(--orange)}
+.pf-body{padding:20px 22px 24px}
+.pf-body h3{font-size:1.08rem;font-weight:700;margin-bottom:10px}
+.pf-meta{display:flex;justify-content:space-between;gap:10px;font-size:.82rem;color:#777}
+.pf-meta strong{color:var(--black);font-weight:600}
+
+/* ============================================================
+   5. STATISTIK
+   ============================================================ */
+.stats{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:22px;text-align:center;
+}
+.stat{
+  background:var(--gray);border-radius:var(--radius);padding:40px 20px;
+  transition:transform .3s ease, background .3s ease;
+}
+.stat:hover{transform:translateY(-6px);background:#ECECEC}
+.stat .stat-num{
+  font-family:var(--font-head);font-size:clamp(2.3rem,5vw,3.6rem);font-weight:800;color:var(--orange);
+}
+.stat .stat-label{font-weight:600;font-size:.95rem;margin-top:6px}
+.stat .stat-sub{font-size:.82rem;color:#777;margin-top:4px}
+
+/* ============================================================
+   6. PENGALAMAN — timeline vertikal
+   ============================================================ */
+.timeline{position:relative;max-width:820px;margin:0 auto;padding-left:8px}
+.timeline::before{
+  content:"";position:absolute;left:11px;top:8px;bottom:8px;width:3px;
+  background:linear-gradient(var(--orange), var(--black));border-radius:3px;
+}
+.tl-item{position:relative;padding:0 0 40px 52px}
+.tl-item:last-child{padding-bottom:0}
+.tl-dot{
+  position:absolute;left:0;top:4px;width:26px;height:26px;border-radius:50%;
+  background:var(--orange);border:5px solid var(--white);
+  box-shadow:0 0 0 3px var(--orange);
+}
+.tl-item:nth-child(even) .tl-dot{background:var(--black);box-shadow:0 0 0 3px var(--black)}
+.tl-year{
+  display:inline-block;background:var(--black);color:var(--white);
+  font-family:var(--font-head);font-weight:700;font-size:.82rem;
+  padding:5px 14px;border-radius:999px;margin-bottom:10px;
+}
+.tl-item:nth-child(odd) .tl-year{background:var(--orange)}
+.tl-card{
+  background:var(--gray);border-radius:24px;padding:24px 26px;
+  transition:transform .3s ease, box-shadow .3s ease;
+}
+.tl-card:hover{transform:translateX(6px);box-shadow:0 16px 34px rgba(0,0,0,.08)}
+.tl-card h3{font-size:1.15rem;font-weight:700;margin-bottom:8px}
+.tl-card p{font-size:.92rem;color:#555}
+
+/* ============================================================
+   7. TESTIMONI — slider kartu di section hitam
+   ============================================================ */
+.tm-track{
+  display:flex;gap:22px;overflow-x:auto;scroll-snap-type:x mandatory;
+  padding-bottom:8px;scrollbar-width:none;
+}
+.tm-track::-webkit-scrollbar{display:none}
+.tm-card{
+  flex:0 0 calc((100% - 44px)/3);min-width:270px;scroll-snap-align:start;
+  background:#1C1C1C;border:1px solid #2A2A2A;border-radius:var(--radius);
+  padding:30px 28px;color:var(--white);
+  transition:transform .3s ease, border-color .3s ease;
+}
+.tm-card:hover{transform:translateY(-8px);border-color:var(--orange)}
+.tm-card .stars{margin-bottom:16px}
+.tm-card .stars svg{width:17px;height:17px}
+.tm-card blockquote{
+  font-size:.95rem;color:#C9C9C9;line-height:1.7;margin-bottom:22px;
+}
+.tm-person{display:flex;align-items:center;gap:13px}
+.tm-avatar{
+  width:46px;height:46px;border-radius:50%;background:var(--orange);
+  display:grid;place-items:center;font-family:var(--font-head);
+  font-weight:800;color:var(--white);font-size:.95rem;flex-shrink:0;
+}
+.tm-person h4{font-size:.98rem;font-weight:700}
+.tm-person span{font-size:.8rem;color:#8F8F8F}
+.section-dark .arrows .arrow-btn{background:#2A2A2A}
+.section-dark .arrows .arrow-btn:hover{background:var(--orange)}
+.slider-head{
+  display:flex;align-items:flex-end;justify-content:space-between;gap:20px;
+  flex-wrap:wrap;margin-bottom:38px;
+}
+.slider-head .section-head{margin:0;text-align:left}
+.slider-head .arrows{flex-shrink:0}
+
+/* ============================================================
+   8. CTA — form WhatsApp / email
+   ============================================================ */
+.cta-box{
+  background:var(--gray);border-radius:var(--radius-lg);
+  padding:56px 6%;display:grid;grid-template-columns:1.1fr .9fr;gap:44px;align-items:center;
+}
+.cta-box h2{font-size:clamp(1.8rem,4vw,2.9rem);font-weight:800;text-transform:uppercase}
+.cta-box h2 .accent{color:var(--orange)}
+.cta-box>.cta-left>p{color:#555;margin-top:14px;max-width:440px}
+.checklist{display:flex;flex-direction:column;gap:12px;margin-top:26px}
+.checklist li{display:flex;align-items:center;gap:11px;font-size:.92rem;font-weight:500}
+.check{
+  width:24px;height:24px;border-radius:50%;background:var(--orange);
+  display:grid;place-items:center;flex-shrink:0;
+}
+.check svg{width:13px;height:13px;stroke:var(--white);stroke-width:3}
+.cta-form{
+  background:var(--white);border-radius:var(--radius);padding:32px 30px;
+  box-shadow:0 20px 46px rgba(0,0,0,.08);
+}
+.cta-form label{font-size:.82rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#777}
+.cta-form .input-row{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
+.cta-form input{
+  flex:1;min-width:180px;padding:15px 20px;border-radius:999px;
+  border:1.5px solid #E2E2E2;font-size:.95rem;font-family:inherit;outline:none;
+  transition:border-color .2s ease;
+}
+.cta-form input:focus{border-color:var(--orange)}
+.form-note{font-size:.78rem;color:#8A8A8A;margin-top:12px}
+.form-msg{font-size:.88rem;font-weight:600;margin-top:12px;min-height:20px}
+.form-msg.ok{color:#0B9B54}
+.form-msg.err{color:#D93025}
+
+/* ============================================================
+   9. PITA MIRING + MARQUEE
+   ============================================================ */
+.ribbon-wrap{overflow:hidden;padding:34px 0 10px}
+.ribbon{
+  background:var(--orange);color:var(--white);
+  transform:rotate(-2.4deg) scale(1.04);
+  padding:16px 0;overflow:hidden;white-space:nowrap;
+  box-shadow:0 16px 36px rgba(255,61,0,.25);
+}
+.marquee-track{
+  display:inline-flex;align-items:center;
+  animation:marquee 26s linear infinite;
+}
+.marquee-track span{
+  font-family:var(--font-head);font-weight:800;font-size:clamp(1rem,2.4vw,1.6rem);
+  text-transform:uppercase;letter-spacing:.04em;padding-right:26px;
+}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ============================================================
+   10. FOOTER
+   ============================================================ */
+.footer{
+  background:var(--black);color:var(--white);
+  border-radius:var(--radius-lg) var(--radius-lg) 0 0;
+  margin-top:56px;padding:58px 6% 30px;
+}
+.footer-top{
+  display:flex;justify-content:space-between;gap:34px;flex-wrap:wrap;
+  padding-bottom:34px;border-bottom:1px solid #262626;
+}
+.footer-brand h3{font-size:clamp(1.7rem,4vw,2.6rem);font-weight:800;text-transform:uppercase}
+.footer-brand h3 span{color:var(--orange)}
+.footer-brand p{color:#8F8F8F;font-size:.92rem;margin-top:10px;max-width:330px}
+.socials{display:flex;gap:12px;flex-wrap:wrap;align-items:flex-start}
+.social{
+  display:inline-flex;align-items:center;gap:9px;
+  padding:12px 22px;border-radius:999px;border:1px solid #333;
+  font-size:.88rem;font-weight:600;color:#D9D9D9;
+  transition:.25s ease;
+}
+.social:hover{background:var(--orange);border-color:var(--orange);color:var(--white);transform:translateY(-3px)}
+.social svg{width:16px;height:16px;fill:currentColor}
+.footer-bottom{
+  display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;
+  padding-top:24px;font-size:.82rem;color:#777;
+}
+.footer-bottom a{color:#AAA}
+.footer-bottom a:hover{color:var(--orange)}
+
+/* ============================================================
+   RESPONSIVE — 360px s/d 1440px
+   ============================================================ */
+@media (max-width:1080px){
+  .float-card{width:200px;padding:16px 18px}
+  .float-left{left:-2%}
+  .float-right{right:-2%}
+}
+@media (max-width:900px){
+  .nav ul{display:none}
+  .nav{grid-template-columns:1fr auto 1fr;padding:8px 10px;gap:10px}
+  .nav .logo{grid-column:2}
+  .hamburger{display:grid}
+  .service-grid{grid-template-columns:1fr;max-width:460px;margin-inline:auto}
+  .cta-box{grid-template-columns:1fr;padding:44px 7%}
+  .pf-card{flex:0 0 calc((100% - 22px)/2)}
+  .tm-card{flex:0 0 calc((100% - 22px)/2)}
+}
+@media (max-width:680px){
+  .hero{padding:126px 0 50px}
+  .hero-visual{width:100%;aspect-ratio:auto;margin-top:40px}
+  .hero-circle{position:relative;left:auto;top:auto;transform:none;margin:0 auto;width:min(280px,74vw)}
+  .float-card{
+    position:relative;top:auto;left:auto;right:auto;transform:none;
+    width:100%;max-width:400px;margin:20px auto 0;animation:none;text-align:left;
+  }
+  .section-dark,.portfolio,.cta-box,.footer{padding-left:24px;padding-right:24px}
+  .section{padding:48px 0}
+  .stats{grid-template-columns:1fr;max-width:400px;margin-inline:auto}
+  .pf-card{flex:0 0 86%}
+  .tm-card{flex:0 0 88%}
+  .pf-controls{flex-direction:column;align-items:stretch}
+  .arrows{justify-content:flex-end}
+  .timeline::before{left:9px}
+  .tl-item{padding-left:44px}
+  .tl-dot{width:22px;height:22px;border-width:4px}
+  .slider-head{flex-direction:column;align-items:flex-start}
+  .footer-top{flex-direction:column}
+  .cta-form .input-row{flex-direction:column}
+  .cta-form .btn{width:100%}
+}
+@media (max-width:380px){
+  .hero h1{font-size:2.3rem}
+  .btn{padding:13px 22px;font-size:.9rem}
+  .nav a.nav-link{padding:8px 12px}
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     1. NAVBAR — pill hitam melayang
+     ============================================================ -->
+<header class="nav-wrap">
+  <nav class="nav" aria-label="Navigasi utama">
+    <ul class="nav-menu">
+      <li><a class="nav-link active" href="#home">Home</a></li>
+      <li><a class="nav-link" href="#about">About</a></li>
+      <li><a class="nav-link" href="#layanan">Layanan</a></li>
+    </ul>
+
+    <!-- GANTI: inisial logo di bawah (misal "RP" untuk Raka Pratama) -->
+    <a href="#home" class="logo" aria-label="Beranda">RP</a>
+
+    <ul class="nav-menu">
+      <li><a class="nav-link" href="#portfolio">Portfolio</a></li>
+      <li><a class="nav-link" href="#testimoni">Testimoni</a></li>
+      <li><a class="nav-link" href="#kontak">Kontak</a></li>
+    </ul>
+
+    <button class="hamburger" id="hamburger" aria-label="Buka menu" aria-expanded="false">
+      <span></span>
+    </button>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#home" class="active">Home</a>
+    <a href="#about">About</a>
+    <a href="#layanan">Layanan</a>
+    <a href="#portfolio">Portfolio</a>
+    <a href="#testimoni">Testimoni</a>
+    <a href="#kontak">Kontak</a>
+  </div>
+</header>
+
+<!-- ============================================================
+     2. HERO
+     ============================================================ -->
+<section class="hero" id="home">
+  <div class="container hero-inner">
+    <span class="bubble reveal">Hello!</span>
+
+    <!-- GANTI: nama klien pada heading di bawah -->
+    <h1 class="reveal d1">I'm Raka,<br>Professional <span class="accent">MC</span></h1>
+
+    <p class="hero-sub reveal d2">
+      Master of Ceremony profesional untuk wedding, corporate, gathering, seminar, dan talkshow.
+      Acara Anda jadi lebih hidup, tertata, dan penuh kesan.
+    </p>
+
+    <div class="hero-actions reveal d3">
+      <a href="#portfolio" class="btn btn-outline">Lihat Portfolio</a>
+      <!-- GANTI: nomor WhatsApp klien pada link di bawah -->
+      <a href="https://wa.me/62xxxxxxxxxx" target="_blank" rel="noopener" class="btn btn-white">Hubungi Saya</a>
+    </div>
+
+    <div class="hero-visual reveal d4">
+      <!-- Lingkaran oranye + foto placeholder orang -->
+      <div class="hero-circle">
+        <!-- GANTI: ganti SVG di bawah dengan <img src="foto-raka.png" alt="Raka Pratama"> -->
+        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="32" cy="23" r="12" fill="#FFFFFF"/>
+          <path d="M10 56c0-12.15 9.85-22 22-22s22 9.85 22 22" fill="#FFFFFF"/>
+        </svg>
+      </div>
+
+      <!-- Kartu kiri: kutipan testimoni singkat + jumlah event -->
+      <div class="float-card float-left">
+        <div class="quote-mark">“</div>
+        <p>Raka bikin acara kami jadi seru dan lancar tanpa hambatan!</p>
+        <div class="big-num">150+</div>
+        <div class="num-label">Event Handled</div>
+      </div>
+
+      <!-- Kartu kanan: pengalaman + rating bintang -->
+      <div class="float-card float-right">
+        <div class="card-head">
+          <div>
+            <div class="exp-years">8 Tahun</div>
+            <div class="exp-label">Pengalaman</div>
+          </div>
+          <div class="icon-dot">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#FF3D00"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l7.1-1.01L12 2z"/></svg>
+          </div>
+        </div>
+        <div class="stars" aria-label="Rating 5 dari 5">
+          <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l7.1-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l7.1-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l7.1-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l7.1-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l7.1-1.01L12 2z"/></svg>
+        </div>
+        <div class="exp-label" style="margin-top:8px">Rating dari klien</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     3. LAYANAN — section hitam membulat
+     ============================================================ -->
+<section class="section" id="layanan">
+  <div class="container">
+    <div class="section-dark">
+      <div class="section-head reveal">
+        <span class="eyebrow">Layanan</span>
+        <h2>Layanan <span class="accent">Saya</span></h2>
+        <p>Pilihan paket MC untuk berbagai jenis acara, dari yang intimate sampai berskala besar.</p>
+      </div>
+
+      <div class="service-grid">
+        <!-- Kartu 1 -->
+        <article class="service-card reveal">
+          <span class="svc-num">01 / WEDDING</span>
+          <h3>Wedding MC</h3>
+          <p>Memandu prosesi akad, resepsi, hingga sesi foto bersama dengan gaya yang hangat, khidmat, dan tidak kaku.</p>
+          <div class="svc-arrow" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
+          </div>
+        </article>
+
+        <!-- Kartu 2 (highlight oranye) -->
+        <article class="service-card highlight reveal d1">
+          <span class="svc-num">02 / CORPORATE</span>
+          <h3>Corporate Event MC</h3>
+          <p>Annual dinner, seminar, product launch, sampai gala night — rundown tertib, bahasa profesional, dan timing tepat.</p>
+          <div class="svc-arrow" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
+          </div>
+        </article>
+
+        <!-- Kartu 3 -->
+        <article class="service-card reveal d2">
+          <span class="svc-num">03 / GATHERING</span>
+          <h3>Gathering &amp; Seminar MC</h3>
+          <p>Family gathering, ulang tahun, talkshow, dan seminar kampus — santai, interaktif, dan tetap terjaga alurnya.</p>
+          <div class="svc-arrow" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     4. PORTFOLIO — slider dokumentasi event
+     ============================================================ -->
+<section class="section" id="portfolio">
+  <div class="container">
+    <div class="portfolio">
+      <div class="section-head reveal">
+        <span class="eyebrow">Portfolio</span>
+        <h2>Dokumentasi <span class="accent">Acara</span></h2>
+        <p>Beberapa acara yang pernah ditangani sebagai Master of Ceremony.</p>
+      </div>
+
+      <div class="pf-controls reveal">
+        <div class="pf-filters" role="group" aria-label="Filter kategori">
+          <button class="chip active" data-filter="all">Semua</button>
+          <button class="chip" data-filter="wedding">Wedding</button>
+          <button class="chip" data-filter="corporate">Corporate</button>
+          <button class="chip" data-filter="gathering">Gathering</button>
+        </div>
+        <div class="arrows">
+          <button class="arrow-btn" id="pfPrev" aria-label="Sebelumnya">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <button class="arrow-btn" id="pfNext" aria-label="Berikutnya">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- GANTI: data event di bawah (judul, lokasi, tahun, kategori, gambar) -->
+      <div class="pf-track" id="pfTrack">
+        <article class="pf-card" data-cat="wedding">
+          <div class="pf-thumb">
+            <span class="pf-tag wedding">Wedding</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Foto Acara</span>
+          </div>
+          <div class="pf-body">
+            <h3>Wedding Adit &amp; Sinta</h3>
+            <div class="pf-meta"><span>The Ritz-Carlton, Jakarta</span><strong>2024</strong></div>
+          </div>
+        </article>
+
+        <article class="pf-card" data-cat="corporate">
+          <div class="pf-thumb">
+            <span class="pf-tag">Corporate</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Foto Acara</span>
+          </div>
+          <div class="pf-body">
+            <h3>Annual Dinner PT Maju Jaya</h3>
+            <div class="pf-meta"><span>Grand Ballroom, Surabaya</span><strong>2024</strong></div>
+          </div>
+        </article>
+
+        <article class="pf-card" data-cat="gathering">
+          <div class="pf-thumb">
+            <span class="pf-tag">Gathering</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Foto Acara</span>
+          </div>
+          <div class="pf-body">
+            <h3>Family Gathering Nusantara</h3>
+            <div class="pf-meta"><span>Taman Bali, Badung</span><strong>2024</strong></div>
+          </div>
+        </article>
+
+        <article class="pf-card" data-cat="wedding">
+          <div class="pf-thumb">
+            <span class="pf-tag wedding">Wedding</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Foto Acara</span>
+          </div>
+          <div class="pf-body">
+            <h3>Wedding Rian &amp; Dewi</h3>
+            <div class="pf-meta"><span>Plaza Convention, Bandung</span><strong>2023</strong></div>
+          </div>
+        </article>
+
+        <article class="pf-card" data-cat="corporate">
+          <div class="pf-thumb">
+            <span class="pf-tag">Corporate</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Foto Acara</span>
+          </div>
+          <div class="pf-body">
+            <h3>Seminar Nasional Teknologi</h3>
+            <div class="pf-meta"><span>UGM, Yogyakarta</span><strong>2023</strong></div>
+          </div>
+        </article>
+
+        <article class="pf-card" data-cat="gathering">
+          <div class="pf-thumb">
+            <span class="pf-tag">Gathering</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Foto Acara</span>
+          </div>
+          <div class="pf-body">
+            <h3>Seminar &amp; Talkshow Karier</h3>
+            <div class="pf-meta"><span>Universitas Brawijaya, Malang</span><strong>2023</strong></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     5. STATISTIK
+     ============================================================ -->
+<section class="section">
+  <div class="container">
+    <div class="stats">
+      <!-- GANTI: angka statistik sesuai data klien -->
+      <div class="stat reveal">
+        <div class="stat-num"><span class="count" data-target="150">0</span>+</div>
+        <div class="stat-label">Event Selesai</div>
+        <div class="stat-sub">Wedding, korporat, &amp; komunitas</div>
+      </div>
+      <div class="stat reveal d1">
+        <div class="stat-num"><span class="count" data-target="120">0</span>+</div>
+        <div class="stat-label">Klien Puas</div>
+        <div class="stat-sub">Rating rata-rata 5 dari 5</div>
+      </div>
+      <div class="stat reveal d2">
+        <div class="stat-num"><span class="count" data-target="25">0</span>+</div>
+        <div class="stat-label">Kota Dijangkau</div>
+        <div class="stat-sub">Siap datang ke lokasi acara</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     6. PENGALAMAN — timeline vertikal
+     ============================================================ -->
+<section class="section" id="about">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Tentang Saya</span>
+      <h2>Perjalanan <span class="accent">Karier</span></h2>
+      <p>Delapan tahun berdiri di depan panggung, dari acara kampus sampai event berskala nasional.</p>
+    </div>
+
+    <!-- GANTI: data pengalaman (tahun, jabatan, deskripsi, nama EO) -->
+    <div class="timeline">
+      <div class="tl-item reveal">
+        <span class="tl-dot"></span>
+        <span class="tl-year">2017 — 2019</span>
+        <div class="tl-card">
+          <h3>Freelance MC</h3>
+          <p>Memulai karier sebagai MC lepas untuk acara kampus, resepsi pernikahan keluarga, dan event komunitas di Yogyakarta.</p>
+        </div>
+      </div>
+
+      <div class="tl-item reveal">
+        <span class="tl-dot"></span>
+        <span class="tl-year">2020 — 2022</span>
+        <div class="tl-card">
+          <!-- GANTI: nama event organizer klien -->
+          <h3>MC Resmi di [Nama EO]</h3>
+          <p>Bergabung dengan event organizer sebagai MC tetap, menangani ratusan agenda korporat, launching produk, dan gala dinner.</p>
+        </div>
+      </div>
+
+      <div class="tl-item reveal">
+        <span class="tl-dot"></span>
+        <span class="tl-year">2022 — 2024</span>
+        <div class="tl-card">
+          <h3>Host Acara Kampus &amp; Seminar</h3>
+          <p>Host rutin untuk seminar nasional, wisuda, talkshow mahasiswa, dan forum bisnis di berbagai universitas.</p>
+        </div>
+      </div>
+
+      <div class="tl-item reveal">
+        <span class="tl-dot"></span>
+        <span class="tl-year">2024 — Sekarang</span>
+        <div class="tl-card">
+          <h3>Professional MC Penuh Waktu</h3>
+          <p>Fokus menangani wedding dan corporate event di 25+ kota, dengan specialisasi rundown rapat dan improvisasi segmen hiburan.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     7. TESTIMONI — slider di section hitam
+     ============================================================ -->
+<section class="section" id="testimoni">
+  <div class="container">
+    <div class="section-dark">
+      <div class="slider-head">
+        <div class="section-head reveal">
+          <span class="eyebrow">Testimoni</span>
+          <h2>Kata <span class="accent">Klien</span></h2>
+          <p>Ulasan dari pasangan, klien korporat, dan panitia yang pernah bekerja sama.</p>
+        </div>
+        <div class="arrows reveal">
+          <button class="arrow-btn" id="tmPrev" aria-label="Testimoni sebelumnya">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <button class="arrow-btn" id="tmNext" aria-label="Testimoni berikutnya">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- GANTI: data testimoni (bintang, kutipan, nama, jabatan) -->
+      <div class="tm-track" id="tmTrack">
+        <article class="tm-card">
+          <div class="stars" aria-label="Rating 5 dari 5">
+            <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l7.1-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l7.1-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l7.1-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l7.1-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l7.1-1.01L12 2z"/></svg>
+          </div>
+          <blockquote>“Raka sangat professional dari briefing sampai acara selesai. Tamu merasa terhibur dan rundown berjalan tepat waktu.”</blockquote>
+          <div class="tm-person">
+            <div class="tm-avatar">AP</div>
+            <div>
+              <h4>Andi Prasetyo</h4>
+              <span>Wedding Organizer, Jakarta</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="tm-card">
+          <div class="stars" aria-label="Rating 5 dari 5">
+            <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l7.1-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l7.1-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l7.1-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l7.1-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l7.1-1.01L12 2z"/></svg>
+          </div>
+          <blockquote>“Annual dinner perusahaan kami jadi jauh lebih hidup. Komunikasi cepat dan paham betul kebutuhan acara korporat.”</blockquote>
+          <div class="tm-person">
+            <div class="tm-avatar">SM</div>
+            <div>
+              <h4>Sari Melati</h4>
+              <span>HRD PT Maju Jaya</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="tm-card">
+          <div class="stars" aria-label="Rating 5 dari 5">
+            <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l7.1-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l7.1-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l7.1-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l7.1-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l7.1-1.01L12 2z"/></svg>
+          </div>
+          <blockquote>“Bisa request rundown dan improv segmen dengan mudah. Peserta seminar antusias dari awal sampai penutup.”</blockquote>
+          <div class="tm-person">
+            <div class="tm-avatar">BS</div>
+            <div>
+              <h4>Budi Santoso</h4>
+              <span>Ketua Panitia Seminar Nasional</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     8. CTA — form kontak WhatsApp / email
+     ============================================================ -->
+<section class="section" id="kontak">
+  <div class="container">
+    <div class="cta-box">
+      <div class="cta-left reveal">
+        <span class="eyebrow">Kontak</span>
+        <h2>Punya Acara Seru?<br><span class="accent">Yuk Diskusi!</span></h2>
+        <p>Tinggalkan nomor WhatsApp atau email Anda. Saya akan menghubungi untuk membahas kebutuhan acara Anda.</p>
+        <ul class="checklist">
+          <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l6 6L20 6"/></svg></span> Respon Cepat</li>
+          <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l6 6L20 6"/></svg></span> Bisa Request Rundown</li>
+          <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l6 6L20 6"/></svg></span> Pengalaman Berbagai Acara</li>
+        </ul>
+      </div>
+
+      <form class="cta-form reveal d1" id="ctaForm" novalidate>
+        <label for="contactInput">Nomor WhatsApp / Email</label>
+        <div class="input-row">
+          <!-- GANTI: placeholder sesuai kebutuhan klien -->
+          <input type="text" id="contactInput" name="contact" placeholder="0812xxxxxx / nama@email.com" autocomplete="off">
+          <button type="submit" class="btn btn-orange">Kirim</button>
+        </div>
+        <p class="form-note">Data Anda hanya digunakan untuk menghubungi kembali soal acara.</p>
+        <p class="form-msg" id="formMsg" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     9. PITA MIRING + MARQUEE
+     ============================================================ -->
+<div class="ribbon-wrap" aria-hidden="true">
+  <div class="ribbon">
+    <div class="marquee-track" id="marquee">
+      <span>Wedding ✦ Corporate Event ✦ Gathering ✦ Seminar ✦ Talkshow ✦</span>
+      <span>Wedding ✦ Corporate Event ✦ Gathering ✦ Seminar ✦ Talkshow ✦</span>
+      <span>Wedding ✦ Corporate Event ✦ Gathering ✦ Seminar ✦ Talkshow ✦</span>
+      <span>Wedding ✦ Corporate Event ✦ Gathering ✦ Seminar ✦ Talkshow ✦</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     10. FOOTER
+     ============================================================ -->
+<footer class="footer">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <!-- GANTI: nama klien -->
+      <h3>Raka <span>Pratama</span></h3>
+      <p>Professional Master of Ceremony untuk wedding, corporate, gathering, seminar, dan talkshow.</p>
+    </div>
+    <div class="socials">
+      <!-- GANTI: URL sosial media klien di bawah -->
+      <a class="social" href="https://instagram.com/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.8.07 1.2.06 1.8.25 2.2.42.6.22 1 .48 1.4.9.4.4.7.8.9 1.4.17.4.36 1 .42 2.2.07 1.2.07 1.6.07 4.8s0 3.6-.07 4.8c-.06 1.2-.25 1.8-.42 2.2-.22.6-.48 1-.9 1.4-.4.4-.8.7-1.4.9-.4.17-1 .36-2.2.42-1.2.07-1.6.07-4.8.07s-3.6 0-4.8-.07c-1.2-.06-1.8-.25-2.2-.42-.6-.22-1-.48-1.4-.9-.4-.4-.7-.8-.9-1.4-.17-.4-.36-1-.42-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.07-4.8c.06-1.2.25-1.8.42-2.2.22-.6.48-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.17 1-.36 2.2-.42C8.4 2.2 8.8 2.2 12 2.2zm0 3.4A6.4 6.4 0 1 0 18.4 12 6.4 6.4 0 0 0 12 5.6zm0 10.6A4.2 4.2 0 1 1 16.2 12 4.2 4.2 0 0 1 12 16.2zm6.6-10.9a1.5 1.5 0 1 1-1.5-1.5 1.5 1.5 0 0 1 1.5 1.5z"/></svg>
+        Instagram
+      </a>
+      <a class="social" href="https://tiktok.com/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M16.6 5.8a4.8 4.8 0 0 1-1-3.3h-3.3v13.1a2.9 2.9 0 1 1-2.9-2.9c.3 0 .6 0 .9.1V9.4a6.2 6.2 0 1 0 5.3 6.1V9.6a8 8 0 0 0 4.6 1.5V7.7a4.7 4.7 0 0 1-3.6-1.9z"/></svg>
+        TikTok
+      </a>
+      <!-- GANTI: nomor WhatsApp klien -->
+      <a class="social" href="https://wa.me/62xxxxxxxxxx" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.7 15L2 22l5.2-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3.1.8.8-3-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.6-6.1c-.3-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.6.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4 0-.5.1-.7l.4-.5c.1-.2.1-.3 0-.5l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 2.9 2.9 0 0 0-.9 2.2 5 5 0 0 0 1.1 2.7 11.5 11.5 0 0 0 4.4 3.9 15 15 0 0 0 1.5.5 3.6 3.6 0 0 0 1.7.1 2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .2-1.3c-.1-.1-.3-.2-.6-.3z"/></svg>
+        WhatsApp
+      </a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© <span id="year">2026</span> Raka Pratama. Semua hak dilindungi.</span>
+    <span>Master of Ceremony Profesional — <a href="#home">Kembali ke atas</a></span>
+  </div>
+</footer>
+
+<script>
+/* ============================================================
+   1. MENU MOBILE (hamburger)
+   ============================================================ */
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+
+hamburger.addEventListener('click', () => {
+  const open = mobileMenu.classList.toggle('show');
+  hamburger.classList.toggle('open', open);
+  hamburger.setAttribute('aria-expanded', open);
+});
+
+mobileMenu.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    mobileMenu.classList.remove('show');
+    hamburger.classList.remove('open');
+    hamburger.setAttribute('aria-expanded', 'false');
+  });
+});
+
+/* ============================================================
+   2. SCROLL SPY — menu aktif oranye mengikuti section
+   ============================================================ */
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-link, .mobile-menu a');
+
+const spy = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const id = entry.target.id;
+      navLinks.forEach(a => {
+        a.classList.toggle('active', a.getAttribute('href') === '#' + id);
+      });
+    }
+  });
+}, { rootMargin: '-45% 0px -50% 0px' });
+
+sections.forEach(sec => spy.observe(sec));
+
+/* ============================================================
+   3. FADE-IN SAAT SCROLL
+   ============================================================ */
+const revealObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.15 });
+
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+/* ============================================================
+   4. ANGKA STATISTIK (count-up)
+   ============================================================ */
+const countObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    const el = entry.target;
+    const target = +el.dataset.target;
+    const duration = 1400;
+    const start = performance.now();
+
+    function tick(now) {
+      const p = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - p, 3); // ease-out
+      el.textContent = Math.round(target * eased);
+      if (p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+    countObserver.unobserve(el);
+  });
+}, { threshold: 0.6 });
+
+document.querySelectorAll('.count').forEach(el => countObserver.observe(el));
+
+/* ============================================================
+   5. PORTFOLIO — filter kategori + tombol panah
+   ============================================================ */
+const pfTrack = document.getElementById('pfTrack');
+const pfPrev = document.getElementById('pfPrev');
+const pfNext = document.getElementById('pfNext');
+const chips = document.querySelectorAll('.chip');
+const pfCards = () => Array.from(pfTrack.querySelectorAll('.pf-card'))
+  .filter(c => c.style.display !== 'none');
+
+function cardStep(track) {
+  const card = track.querySelector(':scope > *:not([style*="display: none"])');
+  if (!card) return 300;
+  const gap = parseFloat(getComputedStyle(track).gap) || 22;
+  return card.getBoundingClientRect().width + gap;
+}
+
+function updateArrows(track, prevBtn, nextBtn) {
+  const maxScroll = track.scrollWidth - track.clientWidth - 2;
+  prevBtn.disabled = track.scrollLeft <= 2;
+  nextBtn.disabled = track.scrollLeft >= maxScroll;
+}
+
+function bindCarousel(track, prevBtn, nextBtn) {
+  prevBtn.addEventListener('click', () => {
+    track.scrollBy({ left: -cardStep(track), behavior: 'smooth' });
+  });
+  nextBtn.addEventListener('click', () => {
+    track.scrollBy({ left: cardStep(track), behavior: 'smooth' });
+  });
+  track.addEventListener('scroll', () => updateArrows(track, prevBtn, nextBtn), { passive: true });
+  window.addEventListener('resize', () => updateArrows(track, prevBtn, nextBtn));
+  updateArrows(track, prevBtn, nextBtn);
+}
+
+bindCarousel(pfTrack, pfPrev, pfNext);
+bindCarousel(document.getElementById('tmTrack'), document.getElementById('tmPrev'), document.getElementById('tmNext'));
+
+// Filter kategori
+chips.forEach(chip => {
+  chip.addEventListener('click', () => {
+    chips.forEach(c => c.classList.remove('active'));
+    chip.classList.add('active');
+    const f = chip.dataset.filter;
+
+    pfTrack.querySelectorAll('.pf-card').forEach(card => {
+      card.style.display = (f === 'all' || card.dataset.cat === f) ? '' : 'none';
+    });
+    pfTrack.scrollTo({ left: 0, behavior: 'smooth' });
+    setTimeout(() => updateArrows(pfTrack, pfPrev, pfNext), 350);
+  });
+});
+
+/* ============================================================
+   6. FORM CTA — validasi & kirim via WhatsApp
+   GANTI: WA_NUMBER di bawah dengan nomor WhatsApp klien
+   ============================================================ */
+const WA_NUMBER = '62xxxxxxxxxx'; // format internasional tanpa "+", contoh: 6281234567890
+
+const ctaForm = document.getElementById('ctaForm');
+const contactInput = document.getElementById('contactInput');
+const formMsg = document.getElementById('formMsg');
+
+ctaForm.addEventListener('submit', e => {
+  e.preventDefault();
+  const value = contactInput.value.trim();
+  const isPhone = /^[0-9+\s-]{9,}$/.test(value);
+  const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+
+  formMsg.className = 'form-msg';
+
+  if (!value) {
+    formMsg.textContent = 'Mohon isi nomor WhatsApp atau email Anda terlebih dahulu.';
+    formMsg.classList.add('err');
+    contactInput.focus();
+    return;
+  }
+  if (!isPhone && !isEmail) {
+    formMsg.textContent = 'Format belum benar. Gunakan nomor WhatsApp atau email yang valid.';
+    formMsg.classList.add('err');
+    contactInput.focus();
+    return;
+  }
+
+  formMsg.textContent = 'Terima kasih! Saya akan segera menghubungi Anda.';
+  formMsg.classList.add('ok');
+
+  if (isPhone) {
+    const text = encodeURIComponent(
+      'Halo Raka, saya ingin diskusi soal acara. Bisa dihubungi di ' + value + '.'
+    );
+    window.open('https://wa.me/' + WA_NUMBER + '?text=' + text, '_blank', 'noopener');
+  } else {
+    window.location.href = 'mailto:?subject=' +
+      encodeURIComponent('Diskusi Acara - Kontak dari Website') +
+      '&body=' + encodeURIComponent('Halo Raka, saya ingin diskusi soal acara. Email saya: ' + value);
+  }
+  ctaForm.reset();
+});
+
+/* ============================================================
+   7. Tahun copyright otomatis
+   ============================================================ */
+document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
